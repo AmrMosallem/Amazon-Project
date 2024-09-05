@@ -8,7 +8,6 @@
 
 ## Products
 A product have the following attributes:
-
 - Product ID
 - Product Name
 - Product Image Path
@@ -23,6 +22,7 @@ A product have the following attributes:
   - Variation n
 
 Example of a Product Object:
+```
 {
     id: "15b6fc6f-327a-4ec4-896f-486349e85a3d", // Product ID
     name: "Intermediate Size Basketball", // Product Name
@@ -33,7 +33,7 @@ Example of a Product Object:
     },
     priceCents: 2095, // Price in cents
 }
-
+```
 ## Cart
 A cart consists of products with varying quantities.
 A cart has the following attributes:
@@ -79,7 +79,7 @@ Example of Cart Object:
 ]
 
 ## Order
-An order is a result of a cart checkout
+An order is a result of a cart checkout.
 An Order has the following attributes:
 - Order ID
 - Order Time
