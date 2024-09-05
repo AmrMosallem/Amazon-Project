@@ -33,6 +33,7 @@ Each product in the system includes the following attributes:
     "priceCents": 2095 // Price in cents
 }
 ```
+Products are stored as objects in the `data/products.js` file.
 
 ### 2. Cart
 
