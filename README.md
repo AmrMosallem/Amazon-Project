@@ -1,4 +1,19 @@
 # Amazon Clone Project Overview
+## Project Pages
+
+The project consists of five main pages:
+
+1. **amazon.html**: A visually appealing page showcasing products for users to browse and add to their cart, including options for selecting product quantities and variations (if applicable).
+  
+2. **product-details.html**: Provides detailed information about a specific product, allowing users to view the product in greater depth.
+
+3. **checkout.html**: A well-organized page displaying the contents of the user’s cart, including details for each item. Users can select delivery options for individual items. The page also includes a payment summary, outlining the total price, shipping fees, taxes, and the order total. A "Place Order" button finalizes the purchase and creates an order.
+
+4. **orders.html**: Displays a comprehensive list of the user’s orders, showing key information such as order date, total cost, and order ID. It also details the items within each order, providing relevant product information.
+
+5. **tracking.html**: Allows users to track the status of an item within an order, displaying expected delivery dates and indicating whether the item is being prepared, shipped, or has been delivered. 
+
+This structure ensures a seamless and user-friendly experience across all stages of the purchasing process.
 
 ## Project Components
 
