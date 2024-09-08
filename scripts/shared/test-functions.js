@@ -34,6 +34,7 @@ function setTestCartToLocalStorage() {
   );
 }
 
+
 // Set a test order in local storage (for testing pages without an active order)
 function setTestOrdersToLocalStorage() {
   localStorage.setItem(
