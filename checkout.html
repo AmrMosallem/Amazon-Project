@@ -88,21 +88,15 @@
                 }
                 .quantity {
                   display: flex;
+                  align-items: center;
                   font-weight: 500;
                   gap: 5px;
-                  .opertions {
-                    display: flex;
-                    gap: 5px;
-                    .btn {
-                      color: #288de0;
-                      text-transform: capitalize;
-                      cursor: pointer;
-                      font-weight: bold;
-                      transition: 0.2s;
-                      &:hover {
-                        color: #c50404;
-                      }
-                    }
+                  .decrease,
+                  .increase {
+                    padding: 2px 8px;
+                    background: #eee;
+                    font-size: 20px;
+                    cursor: pointer;
                   }
                 }
               }
@@ -275,11 +269,9 @@
                 <div class="price">$<span>20.95</span></div>
                 <div class="quantity">
                   Quantity:
-                  <span class="count">1 </span>
-                  <span class="opertions">
-                    <span class="btn update">update</span>
-                    <span class="btn delete">delete</span>
-                  </span>
+                  <span class="decrease">-</span>
+                  <span class="count">1</span>
+                  <span class="increase">+</span>
                 </div>
               </div>
               <div class="delivery-options">
@@ -326,11 +318,9 @@
                 <div class="price">$<span>20.95</span></div>
                 <div class="quantity">
                   Quantity:
-                  <span class="count">1 </span>
-                  <span class="opertions">
-                    <span class="btn update">update</span>
-                    <span class="btn delete">delete</span>
-                  </span>
+                  <span class="decrease">-</span>
+                  <span class="count">1</span>
+                  <span class="increase">+</span>
                 </div>
               </div>
               <div class="delivery-options">
@@ -437,16 +427,95 @@
       </main>
     </div>
   </body>
+  <script src="./data/products.js"></script>
   <script src="./scripts/shared/test-functions.js"></script>
   <script>
     let overlay = document.querySelector(".overlay");
     let summaryOrder = document.querySelector(".summary-order");
+    let cartItemsContainer = document.querySelector(".cart-items");
+    let cartDataProducts = [];
     const showSummary = () => {
       summaryOrder.classList.toggle("show");
       overlay.classList.toggle("hide");
     };
     setTestCartToLocalStorage();
-    let cartItems = JSON.parse(localStorage.getItem("cart"));
-    console.log(cartItems);
+    let cartItemsStorage = JSON.parse(localStorage.getItem("cart"));
+    console.log(cartItemsStorage);
+    console.log(products);
+    for (const e of cartItemsStorage) {
+      let id = e.productId;
+      cartDataProducts.push(products.find((e, i) => e.id == id));
+    }
+    console.log(cartDataProducts);
+    const showItems = () => {
+      cartItemsContainer.innerHTML = "";
+      cartDataProducts.forEach((ele, i) => {
+        cartItemsContainer.innerHTML += `          
+          <div class="card">
+            <div class="delivery-date">
+              <h2>Delivery date: <span>Tuesday, May 2</span></h2>
+            </div>
+            <div class="card-body">
+              <div class="img">
+                <img
+                  src="${ele.image}"
+                  alt=""
+                />
+              </div>
+              <div class="detail-product">
+                <h4 class="name-product">${ele.name}</h4>
+                <div class="price">$<span>${(ele.priceCents / 100).toFixed(
+                  2
+                )}</span></div>
+                <div class="quantity">
+                  Quantity:
+                  <span class="decrease" onclick="decrease(${i})">-</span>
+                  <span class="count">${cartItemsStorage[i].quantity}</span>
+                  <span class="increase" onclick="increase(${i})">+</span>
+                </div>
+              </div>
+              <div class="delivery-options">
+                <h4>Choose a delivery option:</h4>
+                <div class="options">
+                  <div class="option">
+                    <input type="radio" name="date" id="slowly" />
+                    <label for="slowly">
+                      <div class="date">Monday, May 8</div>
+                      <div class="cost"><span>FREE</span> Shipping</div>
+                    </label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="date" id="medium" />
+                    <label for="medium">
+                      <div class="date">Friday, May 2</div>
+                      <div class="cost">$<span>4.99</span> - Shipping</div>
+                    </label>
+                  </div>
+                  <div class="option">
+                    <input type="radio" name="date" id="fast" />
+                    <label for="fast">
+                      <div class="date">Saturday, April 29</div>
+                      <div class="cost">$<span>9.99</span> - Shipping</div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>`;
+      });
+    };
+    const decrease = (i) => {
+      if (cartItemsStorage[i].quantity <= 0) return;
+      cartItemsStorage[i].quantity--;
+      localStorage.setItem("cart", JSON.stringify(cartItemsStorage));
+      showItems();
+    };
+    const increase = (i) => {
+      cartItemsStorage[i].quantity++;
+      localStorage.setItem("cart", JSON.stringify(cartItemsStorage));
+      showItems();
+    };
+    // Run EL Functions
+    showItems();
   </script>
 </html>
