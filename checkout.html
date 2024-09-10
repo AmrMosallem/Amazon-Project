@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="./images/Sicons-Basic-Round-Social-Amazon.512.png"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="./styles/pages/checkout.css" />
     <title>Cart</title>
     <style>
@@ -76,7 +81,6 @@
               gap: 20px;
               .img {
                 width: 100px;
-                height: 50px;
               }
               .detail-product {
                 > * {
@@ -111,6 +115,7 @@
                       cursor: pointer;
                     }
                     label {
+                      width: 150px;
                       .date {
                         color: #007600;
                         font-weight: bold;
@@ -142,11 +147,13 @@
           z-index: 10;
         }
         .summary-order {
+          position: relative;
           width: 30%;
           h2 {
             padding-bottom: 15px;
           }
           .card {
+            position: fixed;
             background-color: #fff;
           }
           .item {
@@ -213,12 +220,15 @@
           }
         }
         .summary-order {
-          position: fixed;
+          position: fixed !important;
           right: -100%;
           z-index: 10;
           width: 82% !important;
           &.show {
             right: 11%;
+          }
+          .card {
+            position: relative !important;
           }
         }
       }
@@ -428,7 +438,7 @@
     </div>
   </body>
   <script src="./data/products.js"></script>
-  <script src="./scripts/shared/test-functions.js"></script>
+  <!-- <script src="./scripts/shared/test-functions.js"></script> -->
   <script>
     let overlay = document.querySelector(".overlay");
     let summaryOrder = document.querySelector(".summary-order");
@@ -438,19 +448,59 @@
       summaryOrder.classList.toggle("show");
       overlay.classList.toggle("hide");
     };
-    setTestCartToLocalStorage();
+    // setTestCartToLocalStorage();
+    // get data of cart from localStorage, save it in cartDataProducts var
     let cartItemsStorage = JSON.parse(localStorage.getItem("cart"));
     console.log(cartItemsStorage);
     console.log(products);
-    for (const e of cartItemsStorage) {
-      let id = e.productId;
+    for (let i = 0; i < cartItemsStorage.length; i++) {
+      let id = cartItemsStorage[i].productId;
       cartDataProducts.push(products.find((e, i) => e.id == id));
+      cartDataProducts[i].quantity = cartItemsStorage[i].quantity;
+      cartDataProducts[i].deliveryOptionId =
+        cartItemsStorage[i].deliveryOptionId;
     }
     console.log(cartDataProducts);
+    // set order and save in localStorage
+    const setOrder = async () => {
+      await fetch("https://supersimplebackend.dev/orders", {
+        method: "POST",
+        body: JSON.stringify({
+          cart: cartItemsStorage,
+        }),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data);
+        })
+        .catch((error) => console.log(err));
+    };
+
     const showItems = () => {
+      // calc date of delivery
+      let d = new Date();
+      let day = d.getDate();
+      d.setDate(day + 8);
+      let dateFree = d.toLocaleDateString("en-ca", {
+        weekday: "short",
+        day: "2-digit",
+        month: "long",
+      });
+      d.setDate(day + 3);
+      let dateMed = d.toLocaleDateString("en-ca", {
+        weekday: "short",
+        day: "2-digit",
+        month: "long",
+      });
+      d.setDate(day + 1);
+      let dateFast = d.toLocaleDateString("en-ca", {
+        weekday: "short",
+        day: "2-digit",
+        month: "long",
+      });
       cartItemsContainer.innerHTML = "";
       cartDataProducts.forEach((ele, i) => {
-        cartItemsContainer.innerHTML += `          
+        cartItemsContainer.innerHTML += `
           <div class="card">
             <div class="delivery-date">
               <h2>Delivery date: <span>Tuesday, May 2</span></h2>
@@ -478,23 +528,23 @@
                 <h4>Choose a delivery option:</h4>
                 <div class="options">
                   <div class="option">
-                    <input type="radio" name="date" id="slowly" />
-                    <label for="slowly">
-                      <div class="date">Monday, May 8</div>
+                    <input type="radio" value="1" name="date${i}" id="slowly_${i}" />
+                    <label for="slowly_${i}">
+                      <div class="date">${dateFree}</div>
                       <div class="cost"><span>FREE</span> Shipping</div>
                     </label>
                   </div>
                   <div class="option">
-                    <input type="radio" name="date" id="medium" />
-                    <label for="medium">
-                      <div class="date">Friday, May 2</div>
+                    <input type="radio" value="2" name="date${i}" id="medium_${i}" />
+                    <label for="medium_${i}">
+                      <div class="date">${dateMed}</div>
                       <div class="cost">$<span>4.99</span> - Shipping</div>
                     </label>
                   </div>
                   <div class="option">
-                    <input type="radio" name="date" id="fast" />
-                    <label for="fast">
-                      <div class="date">Saturday, April 29</div>
+                    <input type="radio" value="3" name="date${i}" id="fast_${i}" />
+                    <label for="fast_${i}">
+                      <div class="date">${dateFast}</div>
                       <div class="cost">$<span>9.99</span> - Shipping</div>
                     </label>
                   </div>
@@ -507,15 +557,34 @@
     const decrease = (i) => {
       if (cartItemsStorage[i].quantity <= 0) return;
       cartItemsStorage[i].quantity--;
+      cartDataProducts[i].quantity--;
       localStorage.setItem("cart", JSON.stringify(cartItemsStorage));
       showItems();
+      calcSummeryOrder();
     };
     const increase = (i) => {
       cartItemsStorage[i].quantity++;
+      cartDataProducts[i].quantity++;
       localStorage.setItem("cart", JSON.stringify(cartItemsStorage));
       showItems();
+      calcSummeryOrder();
+    };
+    const calcSummeryOrder = () => {
+      document.querySelector(
+        ".summary-order .cost-details .items span"
+      ).innerHTML = cartDataProducts.length;
+      let sum = 0;
+      for (let i = 0; i < cartDataProducts.length; i++) {
+        sum +=
+          (cartDataProducts[i].priceCents * cartDataProducts[i].quantity) / 100;
+      }
+      document.querySelector(
+        ".summary-order .cost-details .items+ .cost span"
+      ).innerHTML = sum.toFixed(2);
     };
     // Run EL Functions
     showItems();
+    calcSummeryOrder();
+    setOrder();
   </script>
 </html>
