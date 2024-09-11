@@ -19,6 +19,10 @@
       img {
         width: 100%;
       }
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
       .hide {
         display: none !important;
       }
@@ -412,9 +416,7 @@
                   <div class="cost">$<span>28.89</span></div>
                 </div>
                 <div class="item">
-                  <div class="estimated-tax">
-                    Estimated tax (<span>10</span>%):
-                  </div>
+                  <div class="estimated-tax">Estimated tax (10%):</div>
                   <div class="cost">$<span>28.89</span></div>
                 </div>
               </div>
@@ -429,7 +431,9 @@
                 <label for="pay">Use PayPal</label>
                 <input type="checkbox" id="pay" />
               </div>
-              <div class="create-order">Place your order</div>
+              <div class="create-order">
+                <a href="./orders.html">Place your order</a>
+              </div>
               <!--  -->
             </div>
           </div>
@@ -462,8 +466,8 @@
     }
     console.log(cartDataProducts);
     // set order and save in localStorage
-    const setOrder = async () => {
-      await fetch("https://supersimplebackend.dev/orders", {
+    const setOrder = () => {
+      fetch("https://supersimplebackend.dev/orders", {
         method: "POST",
         body: JSON.stringify({
           cart: cartItemsStorage,
@@ -555,9 +559,9 @@
       });
     };
     const decrease = (i) => {
-      if (cartItemsStorage[i].quantity <= 0) return;
-      cartItemsStorage[i].quantity--;
+      if (cartItemsStorage[i].quantity <= 1) return;
       cartDataProducts[i].quantity--;
+      cartItemsStorage[i].quantity--;
       localStorage.setItem("cart", JSON.stringify(cartItemsStorage));
       showItems();
       calcSummeryOrder();
@@ -570,9 +574,11 @@
       calcSummeryOrder();
     };
     const calcSummeryOrder = () => {
+      // get count of items
       document.querySelector(
         ".summary-order .cost-details .items span"
       ).innerHTML = cartDataProducts.length;
+      // calc total cost of items without tax and delivery
       let sum = 0;
       for (let i = 0; i < cartDataProducts.length; i++) {
         sum +=
@@ -581,10 +587,58 @@
       document.querySelector(
         ".summary-order .cost-details .items+ .cost span"
       ).innerHTML = sum.toFixed(2);
+      // calc delivery cost
+      let allInputOfDelivery = [];
+      for (let i = 0; i < cartDataProducts.length; i++) {
+        console.log(document.getElementsByName(`date${i}`));
+        allInputOfDelivery.push(document.getElementsByName(`date${i}`));
+      }
+      console.log(allInputOfDelivery);
+      let totalDeliveryCost = 0;
+      const utiltyForShiping = () => {
+        totalDeliveryCost = 0;
+        allInputOfDelivery.forEach((e, i) => {
+          e.forEach((e, j) => {
+            if (cartItemsStorage[i].deliveryOptionId == e.value) {
+              if (e.value == 2) totalDeliveryCost += 4.99;
+              else if (e.value == 3) totalDeliveryCost += 9.99;
+            }
+          });
+        });
+        document.querySelector(
+          ".summary-order .cost-details .shipping + .cost span"
+        ).innerHTML = totalDeliveryCost.toFixed(2);
+        document.querySelector(
+          ".summary-order .tax .before-tax + .cost span"
+        ).innerHTML = (totalDeliveryCost + sum).toFixed(2);
+        document.querySelector(
+          ".summary-order .tax .estimated-tax + .cost span"
+        ).innerHTML = ((totalDeliveryCost + sum) * 0.1).toFixed(2);
+        document.querySelector(
+          ".summary-order .end-order .total + .cost span"
+        ).innerHTML = (
+          totalDeliveryCost +
+          sum +
+          (totalDeliveryCost + sum) * 0.1
+        ).toFixed(2);
+      };
+      allInputOfDelivery.forEach((e, i) => {
+        e.forEach((e, j) => {
+          if (cartItemsStorage[i].deliveryOptionId == e.value) {
+            e.checked = true;
+            utiltyForShiping();
+          }
+          e.addEventListener("click", () => {
+            cartItemsStorage[i].deliveryOptionId = e.value;
+            utiltyForShiping();
+            localStorage.setItem("cart", JSON.stringify(cartItemsStorage));
+          });
+        });
+      });
     };
-    // Run EL Functions
+    // Fire EL Functions
     showItems();
     calcSummeryOrder();
-    setOrder();
+    // setOrder();
   </script>
 </html>
