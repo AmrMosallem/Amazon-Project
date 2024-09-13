@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-commerce</title>
+  <link rel="stylesheet" href="styles/pages/amazon.css">
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>  
+  <script src="data/products.js"></script>
+</head>
+<body>
+  <header>
+      <p class="icon">
+        ./amazon
+      </p>
+      <div class="search">
+        <input type="text" placeholder="Search">
+        <i class='bx bx-search'></i>
+      </div>
+      <div class="features">
+        <div class="cart">
+          <i class='bx bx-shopping-bag'></i>
+          <p>Cart <span id="counter">0</span></p>
+        </div>      
+        <div class="order">
+          <p>Returns & Orders</p>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section class="intro">
+      <h1>DISCOVER PRODUCTS THAT MAKE A DIFFERENCE</h1>
+      <p>Discover millions of products, from the latest tech to everyday essentials, all in one place</p>
+  </section>
+
+  <section>
+    <div class="product-container">
+
+
+      
+    </div>
+  </section>
+  
+
+
+</body>
+<script>
+  let productsContainer = document.querySelector(".product-container");
+  products.forEach(product => {
+  productsContainer.innerHTML += `
+    <div class="product">
+      <p>${product.name}</p>
+      <div class="rating">
+        <img src="images/ratings/rating-${product.rating.stars * 10}.png">
+        <p>${product.rating.count}</p>
+      </div>
+      <div class="img">
+        <img src="${product.image}" alt="${product.name}">
+        <div class="colors">
+        </div>
+      </div>
+      <div class = "sizes">
+      </div>
+      <div class="buy">
+        <p>$${(product.priceCents / 100).toFixed(2)}</p>
+        <select name="quantity" id="quantity">
+          <option value="1">1</option>
+          <option value="2">2</option>
+          <option value="3">3</option>
+          <option value="4">4</option>
+          <option value="5">5</option>
+        </select>
+      </div>
+      <button class="add">Add To Cart</button>
+    </div>
+  `;
+
+  let colorsContainer = document.querySelectorAll(".colors");
+  let sizesContainer = document.querySelectorAll(".sizes");
+  let currentColorsContainer = colorsContainer[colorsContainer.length - 1]; 
+  let currentSizesContainer = sizesContainer[sizesContainer.length - 1]; 
+
+  if(product.variation){
+      if(product.variation.Color) {
+        product.variation.Color.forEach(color => {
+          currentColorsContainer.innerHTML += `<div class = "color ${color}" style = "background-color: ${color};"></div>`;
+        })
+      }
+      if(product.variation.Style) {
+        product.variation.Style.forEach(color => { 
+          currentColorsContainer.innerHTML += `<div class = "color ${color}" style = "background-color: ${color};"></div>`;
+        })
+      }
+      if(product.variation.Size) {
+        let title = document.createElement("p");
+        title.innerHTML = "Size: ";
+        currentSizesContainer.prepend(title);
+        product.variation.Size.forEach(size => { 
+          currentSizesContainer.innerHTML += `<button class = "size ${size}">${size}</button>`;
+        })
+      }
+      if(product.variation.Set) {
+        let title = document.createElement("p");
+        title.innerHTML = "Set: ";
+        currentSizesContainer.prepend(title);
+        currentSizesContainer.classList.add("sets");
+        currentSizesContainer.classList.remove("sizes");
+        product.variation.Set.forEach(set => { 
+          currentSizesContainer.innerHTML += `<button class = "set ${set}">${set}</button>`;
+        })
+      }
+      if(product.variation['Shoe Size (US)']) {
+        let title = document.createElement("p");
+        title.innerHTML = "Size: ";
+        currentSizesContainer.prepend(title);
+        product.variation['Shoe Size (US)'].forEach(size => { 
+          currentSizesContainer.innerHTML += `<button class = "size ${size}">${size}</button>`;
+        })
+      }
+      if(product.variation['Waist size (Inches)']) {
+        let title = document.createElement("p");
+        title.innerHTML = "Waist size: ";
+        currentSizesContainer.prepend(title);
+        product.variation['Waist size (Inches)'].forEach(size => { 
+          currentSizesContainer.innerHTML += `<button class = "size ${size}">${size}</button>`;
+        })
+      }
+  }
+
+  });
+
+</script>
+</html>
