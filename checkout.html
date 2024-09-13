@@ -432,7 +432,7 @@
                 <input type="checkbox" id="pay" />
               </div>
               <div class="create-order">
-                <a href="./orders.html">Place your order</a>
+                <a >Place your order</a>
               </div>
               <!--  -->
             </div>
@@ -466,9 +466,12 @@
     }
     console.log(cartDataProducts);
     // set order and save in localStorage
-    const setOrder = () => {
+    const addOrder = () => {
       fetch("https://supersimplebackend.dev/orders", {
         method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
           cart: cartItemsStorage,
         }),
@@ -476,6 +479,11 @@
         .then((res) => res.json())
         .then((data) => {
           console.log(data);
+          let orders = JSON.parse(localStorage.getItem("orders"))||[];
+          orders.push(data);
+          localStorage.setItem("orders", JSON.stringify(orders));
+        }).then(() => {
+          window.location.href = "orders.html";
         })
         .catch((error) => console.log(err));
     };
@@ -640,5 +648,8 @@
     showItems();
     calcSummeryOrder();
     // setOrder();
+    document.querySelector(".create-order").onclick = () => {
+      addOrder();
+    }
   </script>
 </html>
