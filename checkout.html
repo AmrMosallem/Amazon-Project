@@ -3,202 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="./images/Sicons-Basic-Round-Social-Amazon.512.png"
+      type="image/x-icon"
+    />
     <link rel="stylesheet" href="./styles/pages/checkout.css" />
     <title>Cart</title>
-    <style>
-      * {
-        padding: 0;
-        margin: 0;
-        box-sizing: border-box;
-      }
-      img {
-        width: 100%;
-      }
-      body {
-        font-family: Arial, sans-serif;
-      }
-      .container {
-        padding: 10px;
-        width: 90%;
-        margin: auto;
-      }
-      /* navbar */
-      nav {
-        position: fixed;
-        width: 90%;
-        left: 50%;
-        transform: translateX(-50%);
-        background: #fff;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-        .checkout {
-          letter-spacing: -1px;
-          span {
-            letter-spacing: 0;
-            color: #207685;
-          }
-        }
-      }
-      /* main content */
-      .card {
-        border: 1px solid #dcd8d8;
-        border-radius: 10px;
-        padding: 20px;
-      }
-      main {
-        padding-top: 50px;
-        display: flex;
-        justify-content: space-between;
-        .cart-items {
-          width: 67%;
-          .card {
-            margin-bottom: 20px;
-            .delivery-date {
-              color: #007600;
-              margin-bottom: 20px;
-            }
-            .card-body {
-              display: flex;
-              gap: 20px;
-              .img {
-                width: 100px;
-                height: 50px;
-              }
-              .detail-product {
-                > * {
-                  margin-bottom: 10px;
-                }
-                .price {
-                  color: #ab0202;
-                  font-weight: bold;
-                }
-                .quantity {
-                  display: flex;
-                  font-weight: 500;
-                  gap: 5px;
-                  .opertions {
-                    display: flex;
-                    gap: 5px;
-                    .btn {
-                      color: #288de0;
-                      text-transform: capitalize;
-                      cursor: pointer;
-                      font-weight: bold;
-                      transition: 0.2s;
-                      &:hover {
-                        color: #c50404;
-                      }
-                    }
-                  }
-                }
-              }
-              .delivery-options {
-                .options {
-                  .option {
-                    display: flex;
-                    gap: 10px;
-                    margin: 10px 0;
-                    input {
-                      width: 18px;
-                      cursor: pointer;
-                    }
-                    label {
-                      .date {
-                        color: #007600;
-                        font-weight: bold;
-                      }
-                      .cost {
-                        color: gray;
-                        font-size: 14px;
-                      }
-                    }
-                  }
-                }
-              }
-            }
-          }
-        }
-        .summary-order {
-          width: 30%;
-          h2 {
-            padding-bottom: 15px;
-          }
-          .item {
-            display: flex;
-            justify-content: space-between;
-            padding-bottom: 10px;
-          }
-          hr {
-            border: 1px solid #dcd8d8;
-          }
-          .cost hr {
-            margin: 8px 0 0;
-          }
-          .end-order {
-            .item {
-              color: #ab0202;
-              font-weight: bold;
-              font-size: 18px;
-              margin: 10px 0 0;
-            }
-            .paypal {
-              margin: 10px 0;
-              display: flex;
-              align-items: center;
-              gap: 5px;
-              cursor: pointer;
-              input {
-                padding: 22px;
-                width: 18px;
-                height: 18px;
-              }
-            }
-            .create-order {
-              padding: 10px;
-              text-align: center;
-              background-color: #ffd500;
-              border-radius: 10px;
-              cursor: pointer;
-              filter: drop-shadow(0px 0 3px #00000098);
-              transition: 0.2s;
-              &:hover {
-                background-color: #ffc107;
-              }
-            }
-          }
-        }
-      }
-      /* mobile media */
-      @media (max-width: 766px) {
-        .desktop {
-          display: none;
-        }
-        .mobile {
-          display: block;
-        }
-        .logo img {
-          width: 1.5rem;
-        }
-        .cart-items .card-body {
-          flex-direction: column;
-          align-items: center;
-        }
-      }
-      /* desktop media */
-      @media (min-width: 767px) {
-        .desktop {
-          display: block;
-        }
-        .mobile {
-          display: none;
-        }
-        .logo img {
-          width: 6.25rem;
-        }
-      }
-    </style>
   </head>
   <body>
     <nav>
@@ -233,11 +44,9 @@
                 <div class="price">$<span>20.95</span></div>
                 <div class="quantity">
                   Quantity:
-                  <span class="count">1 </span>
-                  <span class="opertions">
-                    <span class="btn update">update</span>
-                    <span class="btn delete">delete</span>
-                  </span>
+                  <span class="decrease">-</span>
+                  <span class="count">1</span>
+                  <span class="increase">+</span>
                 </div>
               </div>
               <div class="delivery-options">
@@ -284,11 +93,9 @@
                 <div class="price">$<span>20.95</span></div>
                 <div class="quantity">
                   Quantity:
-                  <span class="count">1 </span>
-                  <span class="opertions">
-                    <span class="btn update">update</span>
-                    <span class="btn delete">delete</span>
-                  </span>
+                  <span class="decrease">-</span>
+                  <span class="count">1</span>
+                  <span class="increase">+</span>
                 </div>
               </div>
               <div class="delivery-options">
@@ -320,6 +127,32 @@
             </div>
           </div>
         </div>
+        <!-- sidebar icon -->
+        <div
+          class="summary-order-icon mobile"
+          title="show summary order"
+          onclick="showSummary()"
+        >
+          <?xml version="1.0" encoding="utf-8"?><!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+          <svg
+            fill="#000000"
+            width="30px"
+            height="30px"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M11.28 9.53L8.81 12l2.47 2.47a.75.75 0 11-1.06 1.06l-3-3a.75.75 0 010-1.06l3-3a.75.75 0 111.06 1.06z"
+            />
+            <path
+              fill-rule="evenodd"
+              d="M3.75 2A1.75 1.75 0 002 3.75v16.5c0 .966.784 1.75 1.75 1.75h16.5A1.75 1.75 0 0022 20.25V3.75A1.75 1.75 0 0020.25 2H3.75zM3.5 3.75a.25.25 0 01.25-.25H15v17H3.75a.25.25 0 01-.25-.25V3.75zm13 16.75v-17h3.75a.25.25 0 01.25.25v16.5a.25.25 0 01-.25.25H16.5z"
+            />
+          </svg>
+        </div>
+        <!-- overlay -->
+        <div class="overlay hide" onclick="showSummary()"></div>
         <!-- summary of order -->
         <div class="summary-order">
           <div class="card">
@@ -344,9 +177,7 @@
                   <div class="cost">$<span>28.89</span></div>
                 </div>
                 <div class="item">
-                  <div class="estimated-tax">
-                    Estimated tax (<span>10</span>%):
-                  </div>
+                  <div class="estimated-tax">Estimated tax (10%):</div>
                   <div class="cost">$<span>28.89</span></div>
                 </div>
               </div>
@@ -361,11 +192,17 @@
                 <label for="pay">Use PayPal</label>
                 <input type="checkbox" id="pay" />
               </div>
-              <div class="create-order">Place your order</div>
+              <div class="create-order">
+                <a >Place your order</a>
+              </div>
+              <!--  -->
             </div>
           </div>
         </div>
       </main>
     </div>
   </body>
+  <script src="./data/products.js"></script>
+  <script src="./scripts/shared/utilities.js"></script>
+  <script src="./scripts/pages/checkout.js"></script>
 </html>

@@ -1,0 +1,238 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+img {
+  width: 100%;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+.hide {
+  display: none !important;
+}
+.show {
+  display: block !important;
+}
+body {
+  font-family: Arial, sans-serif;
+}
+.container {
+  padding: 10px;
+  width: 90%;
+  margin: auto;
+  max-width: 1099px;
+}
+/* navbar */
+nav {
+  position: fixed;
+  width: 90%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  background: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  max-width: 1099px;
+  .checkout {
+    letter-spacing: -1px;
+    span {
+      letter-spacing: 0;
+      color: #207685;
+    }
+  }
+}
+/* main content */
+.card {
+  border: 1px solid #dcd8d8;
+  border-radius: 10px;
+  padding: 20px;
+}
+main {
+  padding-top: 50px;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  .cart-items {
+    width: 67%;
+    .card {
+      margin-bottom: 20px;
+      .delivery-date {
+        color: #007600;
+        margin-bottom: 20px;
+      }
+      .card-body {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        .img {
+          width: 100px;
+          cursor: pointer;
+        }
+        .detail-product {
+          > * {
+            margin-bottom: 10px;
+          }
+          .price {
+            color: #ab0202;
+            font-weight: bold;
+          }
+          .quantity {
+            display: flex;
+            align-items: center;
+            font-weight: 500;
+            gap: 5px;
+            .decrease,
+            .increase {
+              padding: 2px 8px;
+              background: #eee;
+              font-size: 20px;
+              cursor: pointer;
+            }
+          }
+        }
+        .delivery-options {
+          .options {
+            .option {
+              display: flex;
+              gap: 10px;
+              margin: 10px 0;
+              input {
+                width: 18px;
+                cursor: pointer;
+              }
+              label {
+                width: 150px;
+                .date {
+                  color: #007600;
+                  font-weight: bold;
+                }
+                .cost {
+                  color: gray;
+                  font-size: 14px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .overlay {
+    position: fixed;
+    right: 0;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 5;
+    background-color: #0000009c;
+  }
+  .summary-order-icon {
+    position: fixed;
+    right: -10px;
+    cursor: pointer;
+    z-index: 10;
+  }
+  .summary-order {
+    position: relative;
+    width: 30%;
+    h2 {
+      padding-bottom: 15px;
+    }
+    .card {
+      position: fixed;
+      background-color: #fff;
+    }
+    .item {
+      display: flex;
+      justify-content: space-between;
+      padding-bottom: 10px;
+    }
+    hr {
+      border: 1px solid #dcd8d8;
+    }
+    .cost hr {
+      margin: 8px 0 0;
+    }
+    .end-order {
+      .item {
+        color: #ab0202;
+        font-weight: bold;
+        font-size: 18px;
+        margin: 10px 0 0;
+      }
+      .paypal {
+        margin: 10px 0;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+        input {
+          padding: 22px;
+          width: 18px;
+          height: 18px;
+        }
+      }
+      .create-order {
+        padding: 10px;
+        text-align: center;
+        background-color: #ffd500;
+        border-radius: 10px;
+        cursor: pointer;
+        filter: drop-shadow(0px 0 3px #00000098);
+        transition: 0.2s;
+        &:hover {
+          background-color: #ffc107;
+        }
+      }
+    }
+  }
+}
+/* mobile media */
+@media (max-width: 766px) {
+  .desktop {
+    display: none;
+  }
+  .mobile {
+    display: block;
+  }
+  .logo img {
+    width: 1.5rem;
+  }
+  .cart-items {
+    width: 95% !important;
+    .card-body {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+  .summary-order {
+    position: fixed !important;
+    right: -100%;
+    z-index: 10;
+    width: 82% !important;
+    &.show {
+      right: 11%;
+    }
+    .card {
+      position: relative !important;
+    }
+  }
+}
+/* desktop media */
+@media (min-width: 767px) {
+  .desktop {
+    display: block;
+  }
+  .mobile {
+    display: none;
+  }
+  .logo img {
+    width: 6.25rem;
+  }
+}
