@@ -138,6 +138,7 @@ header input:focus {
   width: 15px;
   cursor: pointer;
   border: 1px solid var(--gray);
+  transition: border-color 0.1s ease-in-out;
 }
 
 .product > p {
