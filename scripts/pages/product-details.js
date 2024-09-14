@@ -6,6 +6,10 @@ const product = getProduct(productId);
 
 loadPage();
 
+document.getElementById("search-button").addEventListener("click", () => {
+  searchProducts(document.getElementById("search-input").value);
+})
+
 function loadPage() {
   document.getElementById("main-product-img").src = product.image;
   document.getElementById("product-name").textContent = product.name;
