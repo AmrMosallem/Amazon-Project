@@ -172,18 +172,18 @@ header input:focus {
   justify-content: space-between;
 }
 
-.size,
-.set {
+.choice {
   cursor: pointer;
   border: 1px solid var(--gray);
   background-color: white;
   border-radius: 20px;
   padding: 2px 20px;
   text-wrap: nowrap;
+  transition: border-color 0.1s ease-in-out;
 }
 
 .active {
-  border: 1px solid var(--black);
+  border-color: var(--black);
 }
 
 .buy {
@@ -210,10 +210,11 @@ header input:focus {
   cursor: pointer;
   font-size: 12px;
   border: none;
-  transition: font-size 0.3s ease-in-out;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   border-radius: 5px;
 }
 
 .add:hover {
-  font-size: 15px;
+  background-color: white;
+  color: var(--black);
 }

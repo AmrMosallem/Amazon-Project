@@ -14,7 +14,7 @@
         ./amazon
       </p>
       <div class="search">
-        <input type="text" placeholder="Search">
+        <input type="text" placeholder="Search" class="search-bar">
         <i class='bx bx-search'></i>
       </div>
       <div class="features">
@@ -36,9 +36,6 @@
 
   <section>
     <div class="product-container">
-
-
-      
     </div>
   </section>
   
@@ -49,14 +46,14 @@
   let productsContainer = document.querySelector(".product-container");
   products.forEach(product => {
   productsContainer.innerHTML += `
-    <div class="product">
+    <div class="product" id="${product.id}">
       <p>${product.name}</p>
       <div class="rating">
         <img src="images/ratings/rating-${product.rating.stars * 10}.png">
         <p>${product.rating.count}</p>
       </div>
       <div class="img">
-        <img src="${product.image}" alt="${product.name}">
+        <img src="${product.image}" class = "product-image">
         <div class="colors">
         </div>
       </div>
@@ -76,6 +73,8 @@
     </div>
   `;
 
+  
+
   let colorsContainer = document.querySelectorAll(".colors");
   let sizesContainer = document.querySelectorAll(".sizes");
   let currentColorsContainer = colorsContainer[colorsContainer.length - 1]; 
@@ -83,8 +82,10 @@
 
   if(product.variation){
       if(product.variation.Color) {
+        currentColorsContainer.classList.add("available");
         product.variation.Color.forEach(color => {
           currentColorsContainer.innerHTML += `<div class = "color ${color}" style = "background-color: ${color};"></div>`;
+          
         })
       }
       if(product.variation.Style) {
@@ -97,7 +98,7 @@
         title.innerHTML = "Size: ";
         currentSizesContainer.prepend(title);
         product.variation.Size.forEach(size => { 
-          currentSizesContainer.innerHTML += `<button class = "size ${size}">${size}</button>`;
+          currentSizesContainer.innerHTML += `<button class = "choice ${size}">${size}</button>`;
         })
       }
       if(product.variation.Set) {
@@ -107,7 +108,7 @@
         currentSizesContainer.classList.add("sets");
         currentSizesContainer.classList.remove("sizes");
         product.variation.Set.forEach(set => { 
-          currentSizesContainer.innerHTML += `<button class = "set ${set}">${set}</button>`;
+          currentSizesContainer.innerHTML += `<button class = "choice ${set}">${set}</button>`;
         })
       }
       if(product.variation['Shoe Size (US)']) {
@@ -115,7 +116,7 @@
         title.innerHTML = "Size: ";
         currentSizesContainer.prepend(title);
         product.variation['Shoe Size (US)'].forEach(size => { 
-          currentSizesContainer.innerHTML += `<button class = "size ${size}">${size}</button>`;
+          currentSizesContainer.innerHTML += `<button class = "choice ${size}">${size}</button>`;
         })
       }
       if(product.variation['Waist size (Inches)']) {
@@ -123,12 +124,32 @@
         title.innerHTML = "Waist size: ";
         currentSizesContainer.prepend(title);
         product.variation['Waist size (Inches)'].forEach(size => { 
-          currentSizesContainer.innerHTML += `<button class = "size ${size}">${size}</button>`;
+          currentSizesContainer.innerHTML += `<button class = "choice ${size}">${size}</button>`;
         })
       }
   }
 
-  });
 
+
+});
+
+  let searchBar = document.querySelector(".search-bar");
+  searchBar.addEventListener("keyup", (e) => {
+    if(e.key === "Enter") {
+      let keyWord = searchBar.value.toLowerCase();
+      if(keyWord === "") {
+        products.forEach(p => {document.getElementById(p.id).style.display = "flex";})
+      } else {
+          products.forEach(p => {
+            document.getElementById(p.id).style.display = "none";
+          })
+          products.forEach(product => {
+            if(product.keywords.includes(keyWord)) {
+              document.getElementById(product.id).style.display = " flex";
+            }
+          })
+      }
+    }
+  });
 </script>
 </html>
