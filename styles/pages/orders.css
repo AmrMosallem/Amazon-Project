@@ -1,0 +1,265 @@
+body {
+    font-family: Arial;
+    margin: 0;
+    background-color: #EBF4F6;
+}
+
+p {
+    margin: 0;
+}
+
+.main {
+    max-width: 1000px;
+    margin-top: 90px;
+    margin-bottom: 100px;
+    padding-left: 20px;
+    padding-right: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-title {
+    margin-bottom: 20px;
+    color: #405D72;
+    font-weight: 900;
+    font-size: 26px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    row-gap: 50px;
+}
+
+.header {
+    background-color: #99b2ca;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px 25px;
+    border-radius: 20px;
+}
+
+.left-section {
+    display: flex;
+    flex-shrink: 0;
+}
+
+.header-label {
+    font-weight: 800;
+    color: #344C64;
+
+}
+
+.date,
+.total {
+    margin-right: 45px;
+    color: #EEEEEE;
+}
+
+.right-section {
+    flex-shrink: 1;
+    color: #EEEEEE;
+}
+
+@media (max-width: 575px) {
+    .header {
+        flex-direction: column;
+        align-items: start;
+        line-height: 23px;
+        padding: 15px;
+    }
+
+    .left-section {
+        flex-direction: column;
+    }
+
+    .header-label {
+        margin-right: 5px;
+
+    }
+
+    .date,
+    .total {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        margin-right: 0;
+
+    }
+
+    .right-section {
+        display: grid;
+        grid-template-columns: auto 1fr;
+    }
+}
+
+.grid-content {
+    display: grid;
+    grid-template-columns: 110px 1fr 220px;
+    column-gap: 35px;
+    row-gap: 60px;
+    align-items: center;
+    padding: 40px 25px;
+    border: 1px solid #344C64;
+    border-top: none;
+    border-radius: 10px;
+
+}
+
+
+@media (max-width: 800px) {
+    .grid-content {
+        grid-template-columns: 110px 1fr;
+        row-gap: 0;
+        padding-bottom: 8px;
+    }
+}
+
+@media (max-width: 450px) {
+    .grid-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+.product-image-container {
+    text-align: center;
+}
+
+.product-image-container img {
+    max-width: 110px;
+    max-height: 110px;
+}
+
+.product-name {
+    font-weight: 800;
+    margin-bottom: 5px;
+    color: #435585;
+}
+
+.arriving-date {
+    margin-bottom: 3px;
+    color: #496989;
+    font-weight: 700;
+}
+
+.quantity {
+    margin-bottom: 8px;
+    color: #496989;
+    font-weight: 700;
+}
+
+.buy-again-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    width: 140px;
+    height: 36px;
+    border-radius: 15px;
+    font-weight: 600;
+    background-color: #9aa0c8;
+    color: #EEEEEE;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+}
+
+.buy-again-button:hover {
+    background-color: #5A639C;
+    border: none;
+}
+
+.buy-again-button:active {
+    background: #9aa0c8;
+    border-color: none;
+    box-shadow: none;
+}
+
+
+.buy-again-icon {
+    width: 25px;
+    margin-right: 15px;
+}
+
+.product-actions {
+    align-self: start;
+}
+
+
+.track-package-button {
+    width: 100%;
+    font-size: 15px;
+    padding: 8px;
+    background-color: #EBF4F6;
+    font-weight: 600;
+    color: #496989;
+    cursor: pointer;
+    border: 1px solid rgb(213, 217, 217);
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(213, 217, 217, 0.5);
+}
+
+
+.track-package-button:hover {
+    background-color: rgb(247, 250, 250);
+}
+
+.track-package-button:active {
+    background-color: rgb(237, 253, 255);
+    box-shadow: none;
+    background-color: #EBF4F6;
+}
+
+
+
+@media (max-width: 800px) {
+    .buy-again-button {
+        margin-bottom: 10px;
+    }
+
+    .product-actions {
+        grid-column: 2;
+        margin-bottom: 30px;
+    }
+
+    .track-package-button {
+        width: 140px;
+    }
+}
+
+@media (max-width: 450px) {
+    .product-image-container {
+        text-align: center;
+        margin-bottom: 25px;
+    }
+
+    .product-image-container img {
+        max-width: 150px;
+        max-height: 150px;
+    }
+
+    .product-name {
+        margin-bottom: 10px;
+    }
+
+    .quantity {
+        margin-bottom: 15px;
+    }
+
+    .buy-again-button {
+        width: 100%;
+        margin-bottom: 15px;
+ 
+    }
+
+    .product-actions {
+        grid-column: auto;
+        margin-bottom: 70px;
+    }
+
+    .track-package-button {
+        width: 100%;
+        padding: 12px;
+    }
+}
