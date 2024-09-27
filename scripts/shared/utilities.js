@@ -33,4 +33,17 @@ function addHeader() {
       searchProducts(document.getElementById("search-input").value);
     }
   });
+  document.getElementById("counter").innerText = getCartCounter();
+}
+
+function getCartCounter(){
+    if(localStorage.getItem("cart")){
+        let counter = 0;
+        let storedCart = JSON.parse(localStorage.getItem("cart"));
+        storedCart.forEach(cartItem => {
+           counter += cartItem.quantity; 
+        });
+        return counter;
+    }
+    return 0;
 }
