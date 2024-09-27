@@ -9,7 +9,7 @@ function searchProducts(query) {
 
 function addHeader() {
   let header = `    <header>
-        <p class="icon">
+        <p class="icon" onclick="window.location.href='amazon.html'">
             ./amazon
         </p>
         <div class="search">
@@ -17,11 +17,11 @@ function addHeader() {
             <i class='bx bx-search'></i>
         </div>
         <div class="features">
-            <div class="cart">
+            <div class="cart" onclick = "window.location.href='checkout.html'">
                 <i class='bx bx-shopping-bag'></i>
                 <p>Cart <span id="counter">0</span></p>
             </div>
-            <div class="order">
+            <div class="order" onclick = "window.location.href='orders.html'">
                 <p>Returns & Orders</p>
             </div>
         </div>

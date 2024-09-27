@@ -1,5 +1,5 @@
 // const productId = "dd82ca78-a18b-4e2a-9250-31e67412f98d";
-
+addHeader();
 let productId = new URLSearchParams(window.location.search).get("id");
 if (!productId) productId = "dd82ca78-a18b-4e2a-9250-31e67412f98d";
 const product = getProduct(productId);
@@ -128,7 +128,7 @@ function loadPage() {
       cartCount += item.quantity;
     });
 
-  document.getElementById("cart-count").textContent = cartCount;
+  document.getElementById("counter").textContent = cartCount;
 }
 
 function getProduct(productId) {
