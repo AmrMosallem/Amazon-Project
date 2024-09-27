@@ -196,14 +196,7 @@
         searchBar.value = searchQuery;
         searchProducts();
     }
-    if(localStorage.getItem("cart")){
-        let counter = 0;
-        let storedCart = JSON.parse(localStorage.getItem("cart"));
-        storedCart.forEach(cartItem => {
-           counter += cartItem.quantity; 
-        });
-        document.getElementById("counter").innerText = counter;
-    }
+    document.getElementById("counter").innerText = getCartCounter();
 </script>
 
 </html>
