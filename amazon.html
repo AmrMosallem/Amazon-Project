@@ -137,6 +137,10 @@
                 }
             })
         }
+        document.querySelector(".product-container").scrollIntoView({
+    behavior: "smooth",
+  
+  });
     }
 
     let extractNamePart = function (filePath) {
@@ -191,6 +195,14 @@
     if (searchQuery) {
         searchBar.value = searchQuery;
         searchProducts();
+    }
+    if(localStorage.getItem("cart")){
+        let counter = 0;
+        let storedCart = JSON.parse(localStorage.getItem("cart"));
+        storedCart.forEach(cartItem => {
+           counter += cartItem.quantity; 
+        });
+        document.getElementById("counter").innerText = counter;
     }
 </script>
 
