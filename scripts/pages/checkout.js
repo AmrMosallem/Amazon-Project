@@ -1,3 +1,6 @@
+ addHeader();
+ document.querySelector("header .features .cart").remove();
+
 let overlay = document.querySelector(".overlay");
 let summaryOrder = document.querySelector(".summary-order");
 let cartItemsContainer = document.querySelector(".cart-items");
