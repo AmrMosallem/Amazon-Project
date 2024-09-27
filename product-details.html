@@ -1,1 +1,133 @@
-awdawdawd
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Azeret+Mono:ital,wght@0,100..900;1,100..900&family=Mingzat&family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Oxygen+Mono&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=SUSE:wght@100..800&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="styles/shared/general.css">
+    <link rel="stylesheet" href="styles/shared/amazon-header.css">
+    <link rel="stylesheet" href="styles/pages/product-details.css">
+
+</head>
+
+<body>
+    <!-- <nav>
+        <img src="images/amazon-logo-white.png" id="header-logo" onclick="window.location.href='amazon.html'">
+        <img src="images/amazon-mobile-logo-white.png" id="header-logo-mobile"  onclick="window.location.href='amazon.html'">
+        <div id="search-bar"><input type="text" placeholder="Search..." id="search-input">
+            <button id="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+        </div>
+        <a href="orders.html" id="header-orders">Returns <strong>
+                <span class="nmp">& Orders</span>
+            </strong></a>
+        <a href="checkout.html" id="header-cart"><img src="images/icons/cart-icon.png"
+                id="header-cart-logo"><strong>Cart</strong>
+            <span id="cart-count">0</span>
+        </a>
+    </nav> -->
+
+    <main>
+        <section class="product-images">
+            <img src="images/products/plain-hooded-fleece-sweatshirt-yellow.jpg" id="main-product-img">
+        </section>
+        <section class="product-details">
+            <span id="product-name">Plain Hooded Fleece Sweatshirt</span>
+            <div class="rating-container">
+                <span id="stars-count">4.5</span><img src="images/ratings/rating-45.png" id="stars-img">
+                <div class="rating-count"><span id="rating-count">317</span> ratings</div>
+            </div>
+            <div class="line"></div>
+            <div class="price-container">
+                <span class="currency">USD</span><span class="price">240</span><span class="cents">99</span>
+            </div>
+            <div class="features">
+                <span class="features-free">FREE Returns</span>
+                <p class="mb-5">All prices include VAT.</p>
+                <div class="features-list">
+                    <div>
+                        <img src="images/icons/cash-on-delivery.png"><span>Cash on Delivery</span>
+                    </div>
+                    <div>
+                        <img src="images/icons/returnable.png"><span>15 days Returnable</span>
+                    </div>
+                    <div>
+                        <img src="images/icons/free-delivery.png"><span>Free Delivery</span>
+                    </div>
+                    <div>
+                        <img src="images/icons/fullfilled-by-amazon.png"><span>Fulfilled by Amazon</span>
+                    </div>
+                    <div>
+                        <img src="images/icons/secure-transaction.png"><span>Secure transaction</span>
+                    </div>
+                </div>
+                <div class="line"></div>
+            </div>
+            <div id="variations-container" style="display: none;">
+                <!-- <div class="variation" data-variation-name="Color">
+                    <span class="variation-name" >Color:</span>
+                    <label>
+                        <input type="radio" name="1-color" value="Red">
+                        <span>Red</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="1-color" value="Blue">
+                        <span>Blue</span>
+                    </label>
+                    <label>
+                        <input type="radio" name="1-color" value="Green">
+                        <span>Green</span>
+                    </label>
+                </div>
+                <div class="line"></div> -->
+            </div>
+            <div>
+                <p class="big-bold-text m-5">About this item</p>
+                <span id="description">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error quidem, culpa
+                    sint, reiciendis fugit in natus, modi dolores molestias aliquid hic odit soluta eius! Provident
+                    voluptas modi distinctio harum corporis?</span>
+            </div>
+        </section>
+        <section class="product-order">
+            <div class="price-container"><span class="currency">USD</span><span class="price">240</span><span
+                    class="cents">99</span>
+            </div>
+            <span class="features-free">FREE Returns</span>
+            <span class="features-free">FREE delivery <strong id="delivery-date-free" style="color:#e6e6e6">Saturday, 14
+                    September</strong></span>
+            <span> Or fastest delivery <strong id="delivery-date-fast">Tomorrow, 13 September.</strong></span></span>
+            <span style="color:#008cff ;"><i class="fa-solid fa-location-dot"></i> deliver to Egypt</span>
+            <span class="stock-state">In Stock</span>
+            <div class="quantity-container">Quantity: <select name="quantity" id="quantity">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select></div>
+            <button id="add-to-cart">Add to Cart</button>
+            <div class="order-details">
+                <span class="grey-text">Ships from</span>
+                <span>Amazon.eg</span>
+                <span class="grey-text">Sold by</span>
+                <span>Amazon.eg</span>
+                <span class="grey-text">Payment</span>
+                <span>Secure transaction</span>
+            </div>
+        </section>
+    </main>
+    <script src="scripts/shared/utilities.js"></script>
+    <script src="data/products.js"></script>
+    <script src="scripts/pages/product-details.js"></script>
+</body>
+
+</html>
