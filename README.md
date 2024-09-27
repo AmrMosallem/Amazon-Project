@@ -2,17 +2,17 @@
 
 ## To Do List
 1. **amazon.html**:
-  - Enable "Add to Cart" Button Functionality
-  - Enable Interactive Variation Selection
+    - Enable "Add to Cart" Button Functionality
+    - Enable Interactive Variation Selection
 
 2. **product-details.html** (Completed)
 
 3. **checkout.html**:
-  - Add Product Variation Details
-  - Delete Cart After Checkout
+    - Add Product Variation Details
+    - Delete Cart After Checkout
 
 4. **orders.html**:
-  - Enable Dynamic Orders Display Functionality
+    - Enable Dynamic Orders Display Functionality
 
 5. **tracking.html** (Not Created Yet)
 
